@@ -206,3 +206,12 @@ insert into Producto(precio, stock, descripcion, nombre)
 VALUES(300000, 80, 'Monitor Samsung Odyssey 27 pulgadas, 240Hz', 'Samsung Odyssey 27"');
 insert into Producto(precio, stock, descripcion, nombre)
 VALUES(400000, 70, 'Auriculares Bose QuietComfort 45, cancelación ruido', 'Bose QC45');
+
+-- Tabla para el microservicio de carrito
+CREATE TABLE IF NOT EXISTS cart_item (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    customer_id BIGINT,
+    product_id BIGINT,
+    quantity INT NOT NULL,
+    PRIMARY KEY (id)
+);
