@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid; 
 
 import java.util.List;
 
@@ -19,8 +20,8 @@ public class CartController {
 
     // Endpoint para AÑADIR un ítem al carrito
     @PostMapping("/add")
-    @ResponseStatus(HttpStatus.CREATED) // Devuelve un código 201 Created si todo va bien.
-    public void addItemToCart(@RequestBody CartItem cartItem) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addItemToCart(@Valid @RequestBody CartItem cartItem) { 
         cartService.addItemToCart(cartItem);
     }
 

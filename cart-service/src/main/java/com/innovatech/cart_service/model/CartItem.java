@@ -4,17 +4,25 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;      
+import jakarta.validation.constraints.NotNull; 
 import lombok.Data;
 
-@Entity // Le dice a Spring que esta clase es una tabla en la base de datos.
-@Data   // De Lombok: crea automáticamente getters, setters, toString(), etc.
+@Entity
+@Data
 public class CartItem {
 
-    @Id // Marca este campo como la clave primaria (Primary Key).
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Le dice a MySQL que genere el ID automáticamente.
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long productId; // El ID del producto (vendrá del microservicio de productos).
-    private Long customerId; // El ID del cliente (vendrá del microservicio de clientes).
-    private int quantity;   // La cantidad de este producto en el carrito.
+    @NotNull(message = "El ID del producto no puede ser nulo.") // Regla 1
+    private Long productId;
+
+    @NotNull(message = "El ID del cliente no puede ser nulo.")   // Regla 2
+    private Long customerId;
+
+    @NotNull(message = "La cantidad no puede ser nula.")         // Regla 3
+    @Min(value = 1, message = "La cantidad debe ser al menos 1.") // Regla 4
+    private Integer quantity; // Cambiado a Integer para permitir la anotación @NotNull
 }
